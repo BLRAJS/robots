@@ -1,0 +1,72 @@
+﻿<div class="card"
+     *ngIf="Robot">
+  <div class="card-header">
+    {{ pageTitle + ": " + Robot.title }}
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2">Description: </div>
+      <div class="col-md-10">{{ Robot.description }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">manufact: </div>
+      <div class="col-md-10">{{ Robot.manufact }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Release Date: </div>
+      <div class="col-md-10">{{ Robot.releaseDate | date}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">MPAA    Rating: </div>
+      <div class="col-md-10">{{ Robot.mpaa | uppercase}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Category: </div>
+      <div class="col-md-10">{{ Robot.category }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Tags:</div>
+      <div class="col-md-10">{{Robot.tags}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Star Rating: </div>
+      <div class="col-md-10">
+        <mh-star [rating]="Robot.starRating"></mh-star>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Audience Approval: </div>
+      <div class="col-md-10">{{ Robot.approvalRating | percent:'1.0-0' }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Average   Price: </div>
+      <div class="col-md-10">{{ Robot.price | currency:'USD':'symbol' }}</div>
+    </div>
+
+
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <button class="btn btn-outline-secondary mr-3"
+                style="width:80px"
+                (click)="onBack()">
+          <i class="fa fa-chevron-left"></i> Back
+        </button>
+        <button class="btn btn-outline-primary mr-3"
+                style="width:80px"
+                [routerLink]="['/Robots', Robot.id, 'edit']">
+          Edit
+        </button>
+        <button class="btn btn-outline-primary"
+                [routerLink]="['/Robots', Robot.id, 'editReactive']">
+          Edit Reactive
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
+</div>

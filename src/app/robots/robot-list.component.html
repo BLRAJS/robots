@@ -1,0 +1,83 @@
+﻿<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <!-- Filter the Title   -->
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2">Filter by:</div>
+      <div class="col-md-4">
+        <input type="text"
+               [(ngModel)]="listFilter" />
+      </div>
+    </div>
+
+    <div class="row"
+         *ngIf="listFilter">
+      <div class="col-md-6">
+        <h4>Robots filtered by: {{listFilter}}</h4>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table"
+             *ngIf="Robots && Robots.length">
+        <thead>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn-outline-primary"
+                      (click)="toggleImage()">
+                {{showImage ? "Hide" : "Show"}} Poster
+              </button>
+            </td>
+            <td>Title</td>
+            <td>manufact</td>
+            <td>Release Date</td>
+            <td>MPAA Rating</td>
+            <td>  Price</td>
+            <td>5 Star Rating</td>
+            <td>Audience Approval</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let Robot of filteredRobots'>
+            <td>
+              <img *ngIf="showImage && Robot.imageurl"
+                   [style.width.px]="50"
+                   [style.margin.px]="2"
+                   [src]="Robot.imageurl"
+                   [title]="Robot.title">
+            </td>
+            <td>
+              <a [routerLink]="['/Robots', Robot.id]">
+                {{ Robot.title }}
+              </a>
+            </td>
+            <td>{{ Robot.manufact }}</td>
+            <td>{{ Robot.releaseDate | date}}</td>
+            <td>{{ Robot.mpaa | uppercase }}</td>
+            <td>{{ Robot.price | currency:'USD':'symbol'}}</td>
+            <td>
+              <mh-star [rating]="Robot.starRating"></mh-star>
+            </td>
+            <td>{{ Robot.approvalRating | percent: '1.0-0'}}</td>
+            <td>
+              <a class="btn btn-outline-primary"
+                 [routerLink]="['/Robots', Robot.id, 'edit']">
+                Edit
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class='alert alert-danger'
+       *ngIf='errorMessage'>
+    Error: {{ errorMessage }}
+  </div>
+</div>

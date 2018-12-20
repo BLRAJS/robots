@@ -1,0 +1,97 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body"
+       *ngIf="Robot">
+    <form novalidate
+          [formGroup]="editForm"
+          (ngSubmit)="saveRobot()">
+      <fieldset>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="inputRobotTitle">Robot Title</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="inputRobotTitle"
+                   type="text"
+                   placeholder="Title (required)"
+                   formControlName="title"
+                   [ngClass]="{'is-invalid': formError.title }" />
+            <span class="invalid-feedback">
+              {{formError.title}}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="inputmanufact">manufact</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="inputmanufact"
+                   type="text"
+                   placeholder="manufact (required)"
+                   formControlName="manufact"
+                   [ngClass]="{'is-invalid': formError.manufact }" />
+            <span class="invalid-feedback">
+              {{formError.manufact}}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="inputStarRating">Star Rating (1-5)</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="inputStarRating"
+                   type="text"
+                   placeholder="Rating"
+                   formControlName="starRating"
+                   [ngClass]="{'is-invalid': formError.starRating}" />
+            <span class="invalid-feedback">
+              {{formError.starRating}}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="inputRobotDescription">Description</label>
+          <div class="col-md-8">
+            <textarea class="form-control"
+                      id="inputRobotDescription"
+                      placeholder="Description"
+                      rows=3
+                      formControlName="description"
+                      [ngClass]="{'is-invalid': formError.description}"></textarea>
+            <span class="invalid-feedback">
+              {{ formError.description}}
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <button class="btn btn-primary mr-3"
+                    type="submit"
+                    style="width:80px;"
+                    [disabled]='!editForm.valid'>
+              Save
+            </button>
+            <button class="btn btn-outline-secondary"
+                    type="button"
+                    style="width:80px"
+                    [routerLink]="['/Robots']">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+</div>
